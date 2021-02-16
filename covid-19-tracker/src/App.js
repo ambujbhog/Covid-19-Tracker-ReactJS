@@ -1,6 +1,7 @@
 import React, {useState, useEffect}  from "react";
-import { FormControl, MenuItem, Select } from '@material-ui/core';
+import { Card, CardContent, FormControl, MenuItem, Select } from '@material-ui/core';
 import InfoBox from './InfoBox';
+import Map from './Map'
 import './App.css';
 
 function App() {
@@ -33,11 +34,12 @@ function App() {
 
   return (
     <div className="app">
-      <div className="app__header">
-        <h1>COVID-19 Tracker</h1>
-        <FormControl className="app_dropdown">
+      <div className="app__left">
+        <div className="app__header">
+          <h1>COVID-19 Tracker</h1>
+          <FormControl className="app_dropdown">
           <Select variant="outlined"
-            onChange={onCountryChange}
+             onChange={onCountryChange}
             value={country} >
           <MenuItem value="worldwide">Worldwide</MenuItem>
 
@@ -45,24 +47,28 @@ function App() {
                 <MenuItem value={country.value}>{country.name}</MenuItem>
               ))}
           </Select>
-        </FormControl>
+          </FormControl>
+        </div>
+
+        <div className="app__stats">
+           <InfoBox title="Coronavirus Cases" total={200} cases={12}/>
+           <InfoBox title="Recovered" total={200} cases={12}/>
+           <InfoBox title="Deaths" total={200} cases={12}/>
+        </div>
+
+        <Map/>
+
       </div>
 
-    <div className="app__stats">
-      <InfoBox title="Coronavirus Cases" total={200} cases={12}/>
-      <InfoBox title="Recovered" total={200} cases={12}/>
-      <InfoBox title="Deaths" total={200} cases={12}/>
-    </div>
-
-      
-
-      {/* Table */}
-
-      {/* Graph */}
-
-      {/* Map */}
-
-     
+      <Card className="app__right">
+        <CardContent>
+          <h3>Live Cases by Country</h3>
+          {/* Table */}
+          <h3>Worldwide New Cases</h3>
+          {/* Graph */}
+        </CardContent>
+          
+      </Card>
     </div>
   );
 }
